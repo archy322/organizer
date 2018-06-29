@@ -1,5 +1,5 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.css";
+import 'bootstrap/dist/css/bootstrap.css';
 import {withBaseIcon} from 'react-icons-kit'
 import {linkedin} from 'react-icons-kit/icomoon/linkedin';
 import {facebook2} from 'react-icons-kit/icomoon/facebook2';
@@ -21,8 +21,8 @@ export function FooterContacts() {
             </div>
             <div className='d-flex w-100 justify-content-between'>
                 <span className='alert-link '>Contacts:</span>
-                <a href="tel: 0952113771" className='phone badge badge-light'>+38(095)211-37-71</a>
-                <a href="tel: 0952113771" className='phone badge badge-light'>+38(095)211-37-71</a>
+                <a href='tel: 0952113771' className='phone badge badge-light'>+38(095)211-37-71</a>
+                <a href='tel: 0952113771' className='phone badge badge-light'>+38(095)211-37-71</a>
             </div>
         </div>
     )

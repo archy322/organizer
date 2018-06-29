@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import "bootstrap/dist/css/bootstrap.css";
+import 'bootstrap/dist/css/bootstrap.css';
 import {FooterContacts} from './FooterContacts';
 import {FooterCopyright} from './FooterCopyright';
 
