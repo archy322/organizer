@@ -11,7 +11,7 @@ class Header extends Component {
         return (
             <header className='d-flex w-100 justify-content-between'>
                 <HeaderLogo/>
-                <HeaderUser invisible={this.props.invisible && true || false}/>
+                <HeaderUser invisible={this.props.invisible || false}/>
             </header>
         );
     }

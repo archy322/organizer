@@ -27,9 +27,13 @@ class Form extends Component {
         })
             .then((response) => {
                 console.log('Request succeeded with JSON response', response);
-                window.location.hash = '/home';
+                window.location.hash = '/user';
                 window.replace();
             }).catch((error) => {
+            this.emailInput.className += ' is-invalid';
+            this.passInput.className += ' is-invalid';
+            this.submitBtn.className = 'btn btn-danger';
+            this.submitBtn.style.background = 'red';
             console.log('Request failed', error);
         });
     };
@@ -77,8 +81,13 @@ class Form extends Component {
                                ref={(input)=> this.rememberInput = input}/>
                         <label className='form-check-label text-light' htmlFor='check'>Remember me</label>
                     </div>
-                    <button type='submit' className='btn btn-warning' id='signBtn' onClick={this.handleSubmit}>Sign
-                        in
+                    <button
+                        type='submit'
+                        className='btn btn-warning'
+                        id='signBtn'
+                        ref={(button)=> this.submitBtn = button}
+                        onClick={this.handleSubmit}>
+                        Sign in
                     </button>
                 </form>
             </main>
