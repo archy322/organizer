@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import Form from './content/Form';
 import Header from './header/Header';
 import Footer from './footer/Footer';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
     render() {

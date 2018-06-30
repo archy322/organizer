@@ -1,41 +1,51 @@
 import React, {Component} from 'react';
+import Axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
 
 class Form extends Component {
-    handleSubmit = (event) => {
-        event.preventDefault();
-        const email = document.getElementById('inputEmail');
-        const pass = document.getElementById('inputPassword');
-        const rememberCheckBox = document.getElementById('check').getAttribute('checked');
-        const url = 'https://5b3643ec6005b00014c5dcf2.mockapi.io/users';
-        const status = (response) => {
-            if (response.status >= 200 && response.status < 300) {
-                return Promise.resolve(response)
-            } else {
-                console.log(response);
-                return Promise.reject(new Error(response.statusText))
-            }
+    constructor() {
+        super();
+        this.state = {
+            emailValue: '',
+            passValue: '',
+            isRemembering: false
         };
-        const json = (response) => {
-            return response.json()
-        };
+        this.url = 'https://5b3643ec6005b00014c5dcf2.mockapi.io/users';
+    }
 
-        fetch(url, {
-            method: 'post',
+    handleSubmit = (event) => {
+        const email = this.emailInput.value;
+        const pass = this.passInput.value;
+        const rememberCheckBox = this.rememberInput.getAttribute('checked');
+
+        event.preventDefault();
+        Axios.post(this.url, {
             headers: {
-                "Content-type": 'application/x-www-form-urlencoded'
+                'Content-type': 'application/x-www-form-urlencoded'
             },
             body: `email=${email}&password=${pass}&remember-me=${rememberCheckBox}`
         })
-            .then(status)
-            .then(json)
-            .then((data) => {
-                console.log('Request succeeded with JSON response', data);
+            .then((response) => {
+                console.log('Request succeeded with JSON response', response);
                 window.location.hash = '/home';
                 window.replace();
             }).catch((error) => {
             console.log('Request failed', error);
         });
+    };
+    handleChange = (event) => {
+        const target = event.target;
+        switch (target.type){
+            case 'email':
+                this.setState({emailValue: event.target.value});
+                break;
+            case 'password':
+                this.setState({passValue: event.target.value});
+                break;
+            case 'checkbox':
+                this.setState({isRemembering: !this.state.isRemembering});
+                break;
+        }
     };
 
     render() {
@@ -46,20 +56,30 @@ class Form extends Component {
                         <label htmlFor='exampleInputEmail1' className='text-light'>Email address</label>
                         <input type="email" className='form-control' id='inputEmail'
                                aria-describedby='emailHelp'
-                               placeholder='Enter email'/>
+                               placeholder='Enter email'
+                               ref={(input)=> this.emailInput = input}
+                               value={this.state.emailValue}
+                                onChange={this.handleChange}/>
                     </div>
                     <div className='form-group'>
                         <label htmlFor='exampleInputPassword1' className='text-light'>Password</label>
                         <input type='password' className='form-control' id='inputPassword'
-                               placeholder='Password'/>
+                               placeholder='Password'
+                               value={this.state.passValue}
+                               ref={(input)=> this.passInput = input}
+                               onChange={this.handleChange}/>
                     </div>
                     <div className='form-group form-check'>
-                        <input type='checkbox' className='form-check-input' id='check'/>
+                        <input type='checkbox'
+                               className='form-check-input'
+                               id='check'
+                               onChange={this.handleChange}
+                               ref={(input)=> this.rememberInput = input}/>
                         <label className='form-check-label text-light' htmlFor='check'>Remember me</label>
                     </div>
-                        <button type='submit' className='btn btn-warning' id='signBtn' onClick={this.handleSubmit}>Sign
-                            in
-                        </button>
+                    <button type='submit' className='btn btn-warning' id='signBtn' onClick={this.handleSubmit}>Sign
+                        in
+                    </button>
                 </form>
             </main>
         );

@@ -1,6 +1,6 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.css";
 import { Link } from 'react-router';
+import "bootstrap/dist/css/bootstrap.css";
 
 export function HeaderUser({invisible}) {
     return (
