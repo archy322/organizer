@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import "bootstrap/dist/css/bootstrap.css";
-import Form from './content/Form';
-import Header from './header/Header';
-import Footer from './footer/Footer';
+import LoggedUserPage from "./LoggedUserPage/LoggedUserPage";
+import HomePage from './HomePage/HomePage';
+import { Router, Route, hashHistory } from 'react-router';
 
 class App extends Component {
     render() {
         return (
             <div className='container-fluid'>
-                <Header/>
-                <Form/>
-                <Footer/>
+               <Router history={hashHistory}>
+                   <Route path='/' component={HomePage}/>
+                   <Route path='/user' component={LoggedUserPage}/>
+               </Router>
             </div>
         );
     }
